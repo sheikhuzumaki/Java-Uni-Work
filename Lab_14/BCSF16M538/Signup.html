@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create your Account</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div style="text-align: center">
+        <h1>SIGN UP FOR <span id="header">STUDENT</span></h1>
+      </div>
+      <form action="Signup" method="post" onsubmit="return validateForm(event)">
+        <div style="margin-top: 20px">
+          <h2>Sign Up as:</h2>
+          <input
+            type="radio"
+            name="user_type"
+            id="student"
+            value="student"
+            checked
+            onclick="toggleFields(this)"
+          /><label for="student">Student</label>
+          <input
+            type="radio"
+            name="user_type"
+            id="teacher"
+            value="teacher"
+            onclick="toggleFields(this)"
+          /><label for="teacher">Teacher</label>
+        </div>
+        <div class="flex" style="margin-top: 20px">
+          <div style="margin-right: 8px" class="w-half">
+            <input type="text" placeholder="Name" name="name" id="name" />
+            <small class="error" id="name-error">Please Enter Name</small>
+          </div>
+          <div class="w-half">
+            <input type="text" placeholder="Email" id="email" name="email" />
+            <small class="error" id="email-error">Please Enter Email</small>
+            <small class="error" id="email-invalid-error"
+              >Please Enter Valid Email Address</small
+            >
+          </div>
+        </div>
+        <div class="flex" style="margin-top: 25px">
+          <div style="margin-right: 8px" class="w-half">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+            />
+            <small class="error" id="password-error">Must Enter Password</small>
+          </div>
+          <div class="w-half">
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              id="phone_no"
+              name="phone_no"
+            />
+            <small class="error" id="phone_no-error"
+              >Must Enter Phone Number</small
+            >
+          </div>
+        </div>
+        <div class="flex" style="margin-top: 25px" id="student-related">
+          <div style="margin-right: 8px" class="w-half">
+            <input
+              type="date"
+              name="dob"
+              placeholder="Date of Birth"
+              id="dob"
+            />
+            <small>Select your Date of Birth</small>
+            <small class="error" id="dob-error"
+              >Must Select Date of Birth</small
+            >
+          </div>
+          <div class="w-half">
+            <input
+              type="text"
+              placeholder="Semester Number"
+              id="semester"
+              name="semester"
+              onkeypress="return this.value.length == 0 && (event.key >= '1' && event.key <= '8')"
+            />
+            <small class="error" id="semester-error"
+              >Must Enter Semester Number</small
+            >
+            <small>Must Between 1 and 8</small>
+          </div>
+        </div>
+        <div class="flex" style="margin-top: 40px">
+          <a href="Signin.html">Sign In Instead</a>
+          <button>Sign up</button>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    function hideErrors() {
+      Array.from(document.getElementsByClassName('error')).forEach(error => {
+        error.style.display = 'none';
+      });
+    }
+    function toggleFields(radio) {
+      hideErrors();
+      document.getElementById('header').innerHTML = radio.id.toUpperCase();
+      let studentRelated = document.getElementById('student-related');
+      studentRelated.style.display = radio.id == 'teacher' ? 'none' : 'flex';
+    }
+
+    function displayErrorMessageifEmpty(element) {
+      if (element.value == '')
+        document.getElementById(`${element.id}-error`).style.display = 'block';
+    }
+    function isEmptyField(field) {
+      return field.value == '';
+    }
+    function isValidEmail(email) {
+      console.log(email);
+      if (email.indexOf('@') == -1) return false;
+      let reciepientName = email.substring(0, email.indexOf('@'));
+      let domainPart = email.substring(email.indexOf('@') + 1);
+      if (
+        domainPart == '' ||
+        domainPart.indexOf('.') == -1 ||
+        domainPart.substring(0, domainPart.indexOf('.') == '')
+      )
+        return false;
+      let topLevelDomain = domainPart.substring(domainPart.indexOf('.') + 1);
+      if (
+        reciepientName == '' ||
+        reciepientName.length > 64 ||
+        topLevelDomain == ''
+      )
+        return false;
+      return true;
+    }
+    function validateForm(e) {
+      hideErrors();
+      let name = e.srcElement[2];
+      let email = e.srcElement[3];
+      let password = e.srcElement[4];
+      let phone_no = e.srcElement[5];
+      let dob = e.srcElement[6];
+      let semester = e.srcElement[7];
+      let valid = true;
+      if (
+        isEmptyField(name) ||
+        isEmptyField(email) ||
+        isEmptyField(password) ||
+        isEmptyField(phone_no)
+      ) {
+        displayErrorMessageifEmpty(name);
+        displayErrorMessageifEmpty(email);
+        displayErrorMessageifEmpty(password);
+        displayErrorMessageifEmpty(phone_no);
+        valid = false;
+      }
+      if (e.srcElement[0].checked) {
+        if (isEmptyField(dob)) {
+          displayErrorMessageifEmpty(dob);
+          valid = false;
+        }
+        if (isEmptyField(semester)) {
+          displayErrorMessageifEmpty(semester);
+          valid = false;
+        }
+      }
+      if (!isEmptyField(email) && !isValidEmail(email.value)) {
+        document.getElementById('email-invalid-error').style.display = 'block';
+        valid = false;
+      }
+      return valid;
+    }
+  </script>
+</html>

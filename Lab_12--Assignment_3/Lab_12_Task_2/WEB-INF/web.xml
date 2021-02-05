@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+	
+	<servlet>
+		<servlet-name>xyz</servlet-name>
+		<servlet-class>Insert</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>xyz</servlet-name>
+		<url-pattern>/Insert</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>yyy</servlet-name>
+		<servlet-class>Search</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>yyy</servlet-name>
+		<url-pattern>/Search</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>xxx</servlet-name>
+		<servlet-class>Error</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>xxx</servlet-name>
+		<url-pattern>/Error</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>zxy</servlet-name>
+		<servlet-class>All</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>zxy</servlet-name>
+		<url-pattern>/All</url-pattern>
+	</servlet-mapping>
+
+
+</web-app>

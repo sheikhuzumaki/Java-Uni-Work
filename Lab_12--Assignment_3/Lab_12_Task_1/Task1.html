@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>User Input Form</title>
+  </head>
+  <script type="text/javascript">
+    function validate() {
+      const errorElements = document.getElementsByClassName('error');
+      for(var i = 0; i < errorElements.length; i++) {
+      errorElements[i].innerHTML = '';
+      }
+      if (document.form.name.value == "") {
+        document.getElementsByClassName('error')[0].innerHTML = 'Enter Name' ;
+        return false ;
+      }
+      if (document.form.pass.value == "") {
+        document.getElementsByClassName('error')[1].innerHTML = 'Enter Password' ;
+        return false ;
+      }
+      if (document.form.gender.value == "") {
+        document.getElementsByClassName('error')[2].innerHTML = 'Select Gender' ;
+        return false ;
+      }
+      if (document.getElementsByName('planguage[]')[0].checked == false && document.getElementsByName('planguage[]')[1].checked == false && document.getElementsByName('planguage[]')[2].checked == false) {
+        document.getElementsByClassName('error')[4].innerHTML = 'Select Atleast One Language' ;
+        return false ;
+      }
+      if (document.form.inst.value == "") {
+        document.getElementsByClassName('error')[5].innerHTML = 'Enter Instruction' ;
+        return false ;
+      }
+    }
+    function clear_all() {
+      const errorElements = document.getElementsByClassName('error');
+      for(var i = 0; i < errorElements.length; i++) {
+      errorElements[i].innerHTML = '';
+      }
+      document.form.name.value = "";
+      document.form.pass.value = "";
+      document.getElementsByName('gender')[0].checked = false;
+      document.getElementsByName('gender')[1].checked = false;
+      document.getElementsByName('planguage[]')[0].checked = false;
+      document.getElementsByName('planguage[]')[1].checked = false;
+      document.getElementsByName('planguage[]')[2].checked = false;
+      document.form.inst.value = "";
+      return false ;
+    }
+    function  cleartext() {
+      document.form.inst.value = "";
+      return false ;
+    }
+  </script>
+  <body>
+    <div class="container" style="margin: auto;">
+      <h1>User Input Form</h1>
+      <br>
+      <form name="form" method="Post" action="send" >
+        <div class="container">
+          <h3>Personel Information</h3>
+          <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" class="form-control-sm">
+          <span style="color: red" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="pass" class="form-control-sm">
+          <span style="color: red" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label>Gender :</label>
+          <label><input type="radio" name="gender" value="Male"> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <span style="color: red" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label>Age</label>
+          <select name="age">
+            <option value="< 1 year old">< 1 year old</option>
+            <option value="1-10 year old">1-10 year old</option>
+            <option value="11-20 year old">11-20 year old</option>
+            <option value="11-20 year old">11-20 year old</option>
+            <option value="21-30 year old">21-30 year old</option>
+            <option value="31-40 year old">31-40 year old</option>
+            <option value="41-50 year old">41-50 year old</option>
+            <option value="50+ year old">50+ year old</option>
+          </select>
+          <span style="color: red" class="error"></span>
+        </div>
+        </div>
+        <br>
+        <div class="container">
+          <h3>Languages</h3>
+          <div class="form-group">
+          <label><input type="checkbox" name="planguage[]" value="Java"> Java</label>
+          <label><input type="checkbox" name="planguage[]" value="C/C++"> C/C++</label>
+          <label><input type="checkbox" name="planguage[]" value="C#"> C#</label>
+          <span style="color: red" class="error"></span>
+        </div>
+        </div>
+        <br>
+        <div class="container">
+          <h3>Instructions</h3>
+          <div class="form-group">
+          <textarea style="resize: none; width: 300px ; height: 100px;" onfocus="return cleartext()" name="inst">Enter your instruction here. . .</textarea>
+          <span style="color: red" class="error"></span>
+          </div>
+        </div>
+        <div class="container">
+          <div class="form-group">
+            <button onclick="return validate()" type="submit" name="send" class="btn btn-primary">SEND</button>
+          </div>
+        </div>
+      </form>
+      <button style="position: relative;bottom: 38px ; left: 100px;" onclick="return clear_all()" name="clear" class="btn btn-danger">CLEAR</button>
+    </div>
+  </body>
+</html>

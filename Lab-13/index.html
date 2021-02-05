@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Task 1</title>
+</head>
+<script type="text/javascript" language="javascript">
+	function validate() {
+		const errorElements = document.getElementsByClassName('error');
+		for(var i = 0; i < errorElements.length; i++) {
+			errorElements[i].innerHTML = '';
+		}
+	if(document.form.name.value == ""){
+		document.getElementsByClassName('error')[0].innerHTML = 'Enter Item Name' ;
+		return false ;
+	}
+}
+</script>
+<body>
+	<h1>Store</h1>
+	<br>
+	<div>
+		<form name="form" onsubmit="return validate()" method="Post" action="process">
+		<label>Enter Item Name</label>
+		<input type="text" name="name">
+		<span style="color: red" class="error"></span>
+		<br><br><br>
+		<input type="submit" name="submit" value="Search">
+	</form>
+	<br><br><br>
+	<form name="form1" method="Post" action="showall">
+	<input type="submit" name="submit2" value="Show All">
+	</form>
+	</div>
+</body>
+</html>

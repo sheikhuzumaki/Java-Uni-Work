@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+	
+	<servlet>
+		<servlet-name>Up</servlet-name>
+		<servlet-class>Signup</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Up</servlet-name>
+		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>In</servlet-name>
+		<servlet-class>Signin</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>In</servlet-name>
+		<url-pattern>/Welcome</url-pattern>
+	</servlet-mapping>
+
+
+
+</web-app>

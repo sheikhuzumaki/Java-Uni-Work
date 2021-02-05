@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Insert Info</title>
+  </head>
+  <script type="text/javascript">
+    function validate() {
+    	const errorElements = document.getElementsByClassName('error');
+      for(var i = 0; i < errorElements.length; i++) {
+      errorElements[i].innerHTML = '';
+      }
+    	if (document.form.cname.value == "") {
+    	document.form.cname.focus();
+        document.getElementsByClassName('error')[0].innerHTML = 'Enter Comapny Name' ;
+        return false ;
+      }
+      if (document.form.model.value == "") {
+      	document.form.model.focus();
+        document.getElementsByClassName('error')[1].innerHTML = 'Enter Model' ;
+        return false ;
+      }
+      if (document.form.price.value == "") {
+      	document.form.price.focus();
+        document.getElementsByClassName('error')[2].innerHTML = 'Enter Price' ;
+        return false ;
+      }
+    }
+    function pattern_input(event) {
+	var keychar ;
+	keychar = event.key ;
+	if ((("0123456789").indexOf(keychar)) > -1){
+		document.getElementsByClassName('error')[2].innerHTML = '' ;
+		return true ;
+	}
+		else{
+		document.getElementsByClassName('error')[2].innerHTML = 'Only Numeric Values' ;
+		return false ;
+	}
+}
+  </script>
+  <body>
+    <div class="container">
+    	<h3>Insert Information</h3><br>
+    	<form name="form" method="Post" action="Insert">
+    		<div class="form-group">
+    			<label>Company Name</label>
+    			<input type="text" name="cname">
+    			<span style="color: red" class="error"></span>
+    		</div><br>
+    		<div class="form-group">
+    			<label>Model</label>
+    			<input type="text" name="model">
+    			<span style="color: red" class="error"></span>
+    		</div><br>
+    		<div class="form-group">
+    			<label>Price</label>
+    			<input type="text" name="price" onkeypress='return pattern_input(event)'>
+    			<span style="color: red" class="error"></span>
+    		</div><br>
+    		<div class="form-group">
+    			<button onclick="return validate()" class="btn btn-primary">Save</button>
+    		</div>
+    	</form>
+    </div>
+  </body>
+</html>

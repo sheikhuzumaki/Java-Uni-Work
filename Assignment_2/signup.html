@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Task 2</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<script type="text/javascript" language="javascript">
+	function validate() {
+		const errorElements = document.getElementsByClassName('error');
+		for(var i = 0; i < errorElements.length; i++) {
+			errorElements[i].innerHTML = '';
+		}
+	if(document.form.name_1.value == ""){
+		document.getElementsByClassName('error')[0].innerHTML = 'Enter First Name' ;
+		return false ;
+	}
+	if(document.form.name_2.value == ""){
+		document.getElementsByClassName('error')[1].innerHTML = 'Enter Last Name' ;
+		return false ;
+	}
+	if(document.form.Email.value == ""){
+		document.getElementsByClassName('error')[2].innerHTML = 'Enter Email' ;
+		return false ;
+	}
+	if (!validateEmail(document.form.Email.value)) {
+		document.getElementsByClassName('error')[2].innerHTML = 'Email is invalid' ;
+		return false ;
+	}
+	if(document.form.pass.value == ""){
+		document.getElementsByClassName('error')[3].innerHTML = 'Enter Password' ;
+		return false ;
+	}
+	if(document.form.cpass.value == ""){
+		document.getElementsByClassName('error')[4].innerHTML = 'Enter Confrim Password' ;
+		return false ;
+	}
+	if(document.form.pass.value !=  document.form.cpass.value){
+		document.getElementsByClassName('error')[4].innerHTML = 'Password and Confirm Password Not Same' ;
+		return false ;
+	}
+
+}
+
+function validateEmail(email) {
+	const atIndex = email.indexOf("@");
+	const dotIndex = email.lastIndexOf(".");
+
+	if (atIndex == -1 || dotIndex == -1)
+		return false;
+	if (atIndex < 1)
+		return false;
+	if (email[atIndex + 1] == '.' ) return false;
+	if (email.length - 1 == dotIndex ) return false;
+
+	return true ;
+
+}
+</script>
+<body>
+	<div class="container">
+		<div>
+			<form name="form" action="signup" method="Post" onsubmit="return validate()">
+			<div class="form-group">
+				<ul style="list-style-type: none; display: inline;">
+					<li style="display: inline">
+						<label class="lab">First Name</label>
+					</li>
+					<li style="display: inline">
+						<input type="text" name="name_1">
+					</li>
+					<li style="display: inline">
+						<span style="color: red" class="error"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="form-group">
+				<ul style="list-style-type: none; display: inline;">
+					<li style="display: inline">
+						<label class="lab">Last Name</label>
+					</li>
+					<li style="display: inline">
+						<input type="text" name="name_2">
+					</li>
+					<li style="display: inline">
+						<span style="color: red" class="error"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="form-group">
+				<ul style="list-style-type: none; display: inline;">
+					<li style="display: inline">
+						<label class="lab">Email</label>
+					</li>
+					<li style="display: inline">
+						<input type="text" name="Email">
+					</li>
+					<li style="display: inline">
+						<span style="color: red" class="error"></span>
+					</li>
+				</ul>
+			<div class="form-group">
+				<ul style="list-style-type: none; display: inline;">
+					<li style="display: inline">
+						<label class="lab">Password</label>
+					</li>
+					<li style="display: inline">
+						<input type="Password" name="pass">
+					</li>
+					<li style="display: inline">
+						<span style="color: red" class="error"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="form-group">
+				<ul style="list-style-type: none; display: inline;">
+					<li style="display: inline">
+						<label class="lab">Confirm Password</label>
+					</li>
+					<li style="display: inline">
+						<input type="Password" name="cpass">
+					</li>
+					<li style="display: inline">
+						<span style="color: red" class="error"></span>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<ul style="list-style-type: none;">
+					<li>
+						<button type="Submit">Next</button>
+					</li>
+				</ul>
+			</div>
+		</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		if (window.location.search.indexOf("error") !== -1) {
+            alert('Email Already Used !');
+        }
+	</script>
+</body>
+</html>
